@@ -9,5 +9,3 @@ class Cores:
     cyan = '\033[1;36m' 
     cinza = '\033[1;37m' 
     fecha_cor = '\033[m'
-
-cor = Cores()

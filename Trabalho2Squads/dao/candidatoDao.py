@@ -9,36 +9,31 @@ class CandidatoDao:
 
 
     def validar_candidato(self, candidato:Candidato):
-        if candidato.get_framework_front() in self.__dict_candidatos_validos[candidato.get_nome()] and candidato.get_banco_de_dados() in self.__dict_candidatos_validos[candidato.get_nome()]:
-            validar = 'Valido'
-            print(f'Candidato {cor.amarelo}{candidato.get_nome()}{cor.fecha_cor}, é válido para entrar na equipe.\nTrabalhando com a linguagem {cor.verde}{candidato.get_linguagem()}{cor.fecha_cor} e framework {cor.vermelho}{candidato.get_framework_front}{cor.fecha_cor}!')
-            return validar
+        if (candidato.get_framework_front() in self.__dict_candidatos_validos[candidato.get_nome()]) or (candidato.get_banco_de_dados() in self.__dict_candidatos_validos[candidato.get_nome()]):
+            return f'Candidato {cor.amarelo}{candidato.get_nome()}{cor.fecha_cor}, é Válido para entrar na equipe.\nTrabalhando com a linguagem {cor.verde}{candidato.get_linguagem()}{cor.fecha_cor} e framework {cor.vermelho}{candidato.get_framework_front()}{cor.fecha_cor}!'
 
-        elif candidato.get_framework_front() not in self.__dict_candidatos_validos[candidato.get_nome()] and candidato.get_banco_de_dados() not in self.__dict_candidatos_validos[candidato.get_nome()]:
-            validar = 'Inválido'
-            print(f'Candidato {candidato.get_nome()}, não esta válido')
-            return validar
+        elif (candidato.get_framework_front() not in self.__dict_candidatos_validos[candidato.get_nome()]) or (candidato.get_banco_de_dados() not in self.__dict_candidatos_validos[candidato.get_nome()]):
+            return f'Candidato {cor.amarelo}{candidato.get_nome()}{cor.fecha_cor}, esta Inválido.'
+
         else:
-            validar =  'Inválido'
-            return validar
+            return f'Candidato {cor.amarelo}{candidato.get_nome()}{cor.fecha_cor}, esta Inválido.'
 
-    def cadastrar_na_equipe(self, candidato:Candidato):
-        if candidato.get_framework_front() in self.__dict_equipes['padawan'] and candidato.get_banco_de_dados() in self.__dict_equipes['padawan']:
-            equipe = 'PADAWAN'
+
+    def indicar_equipe(self, candidato:Candidato):
+        padawan = ''
+        labs = ''
+        lolita = ''
+        if candidato.get_framework_front() in self.__dict_equipes['padawan'] or candidato.get_banco_de_dados() in self.__dict_equipes['padawan']:
+            padawan = 'PADAWAN'
             print(f'Equipe compatível: {cor.amarelo}PADAWAN{cor.fecha_cor}\n')
-            return equipe
 
-        if candidato.get_framework_front() in self.__dict_equipes['labs'] and candidato.get_banco_de_dados() in self.__dict_equipes['labs']:
-            equipe = 'LABS'
+        if candidato.get_framework_front() in self.__dict_equipes['labs'] or candidato.get_banco_de_dados() in self.__dict_equipes['labs']:
+            labs = 'LABS'
             print(f'Equipe compatível: {cor.amarelo}LABS{cor.fecha_cor}\n')
-            return equipe
         
-        if candidato.get_framework_front() in self.__dict_equipes['lolita'] and candidato.get_banco_de_dados() in self.__dict_equipes['lolita']:
-            equipe = 'LOLITA'
+        if candidato.get_framework_front() in self.__dict_equipes['lolita'] or candidato.get_banco_de_dados() in self.__dict_equipes['lolita']:
+            lolita = 'LOLITA'
             print(f'Equipe compatível: {cor.amarelo}LOLITA{cor.fecha_cor}\n')
-            return equipe
 
-# dict_candidato = {'nome': 'tiago', 'linguagem': 'python', 'framework': 'react', 'banco': 'mongodb'}
-# person = Candidato(dict_candidato)
-# pessoa = CandidatoDao()
-# print(person.get_nome())
+        return padawan + labs + lolita
+        
